@@ -26,15 +26,6 @@ const blocks = {
     EATERLEFT:      {VALUE : 'eater-left',      IMAGE : getImageObject('eaterL.png')}, 
     FAIRY:          {VALUE : 'fairy',           IMAGE : getImageObject('fairy.png')}
 }
-const E = blocks.EMPTY;
-const C = blocks.CRATE;
-const D = blocks.CRATEDEAD;
-const G = blocks.GHOST;
-const A = blocks.GHOSTAFRAID;
-const R = blocks.EATERRIGHT;
-const L = blocks.EATERLEFT;
-const F = blocks.FAIRY;
-
 
 function initGameGrid(){
     console.log("initGameGrid started !")
