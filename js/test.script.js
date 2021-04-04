@@ -10,8 +10,7 @@ const R = blocks.EATERRIGHT;
 const L = blocks.EATERLEFT;
 const F = blocks.FAIRY;
 
-
-describe('Test basique', function () {
+describe('basic test', function () {
     describe('Boolean', function () {
         it('Boolean true if not equals to false', function () {
             assert(true !== false);
@@ -48,18 +47,48 @@ describe('Initialisation', function () {
     });
     
     describe('when bindNextBlocksToTopOfTheGrid() is called given 4 blocks', function () {
-        it('Those 4 blocks should be asign at top of the grid', function () {
-            var nextBlocks = [
-                [blocks.CRATE, blocks.EMPTY],
-                [blocks.CRATE, blocks.EATERLEFT]
-            ];
+        var nextBlocks = [
+            [blocks.CRATE, blocks.EMPTY],
+            [blocks.CRATE, blocks.EATERLEFT]
+        ];
 
+        before(function(){
             initGameGrid();
             bindNextBlocksToTopOfTheGrid(nextBlocks);
-            assert(grid[0][2] == blocks.CRATE, "should be a CRATE but its a " + grid[0][2].VALUE)
-            assert(grid[0][3] == blocks.EMPTY, "should be a EMPTY but its a " + grid[0][3].VALUE)
-            assert(grid[1][2] == blocks.CRATE, "should be a CRATE but its a " + grid[1][2].VALUE)
-            assert(grid[1][3] == blocks.EATERLEFT, "should be a EATERLEFT but its a " + grid[1][3].VALUE)
+        });
+
+        it('Grid at [0][2] block should be a CRATE', function () {
+            console.log("it 1");
+            console.log(grid[0][2].VALUE);
+            assert.equal(grid[0][2].VALUE , blocks.CRATE.VALUE)
+        });
+        it('Grid at [0][3] block should be a EMPTY', function () {
+            console.log("it 2");
+            assert.equal(grid[0][3].VALUE , blocks.EMPTY.VALUE)
+        });
+        it('Grid at [1][2] block should be a CRATE', function () {
+            console.log("it 3");
+            assert.equal(grid[1][2].VALUE , blocks.CRATE.VALUE)
+        });
+        it('Grid at [1][3] block should be a EATERLEFT', function () {
+            console.log("it 4");
+            assert.equal(grid[1][3].VALUE , blocks.EATERLEFT.VALUE)
+        });
+    });
+
+    describe('calling resetPosition()', function () {
+        
+        before(function(){
+            currentRow = 3;
+            xPosition = 4;
+            resetPosition();
+        });
+
+        it('currentRow should be valorized at 1', function () {
+            assert.equal(currentRow, 1);
+        });
+        it('xPosition should be valorized at 2', function () {
+            assert.equal(xPosition, 2);
         });
     });
 

@@ -55,6 +55,7 @@ function resetPosition(){
 }
 
 function bindNextBlocksToTopOfTheGrid(nextBlocks){
+    console.log("bindNextBlocksToTopOfTheGrid !");
     grid[0][2] = nextBlocks[0][0];
     grid[0][3] = nextBlocks[0][1];
     grid[1][2] = nextBlocks[1][0];
