@@ -58,20 +58,15 @@ describe('Initialisation', function () {
         });
 
         it('Grid at [0][2] block should be a CRATE', function () {
-            console.log("it 1");
-            console.log(grid[0][2].VALUE);
             assert.equal(grid[0][2].VALUE , blocks.CRATE.VALUE)
         });
         it('Grid at [0][3] block should be a EMPTY', function () {
-            console.log("it 2");
             assert.equal(grid[0][3].VALUE , blocks.EMPTY.VALUE)
         });
         it('Grid at [1][2] block should be a CRATE', function () {
-            console.log("it 3");
             assert.equal(grid[1][2].VALUE , blocks.CRATE.VALUE)
         });
         it('Grid at [1][3] block should be a EATERLEFT', function () {
-            console.log("it 4");
             assert.equal(grid[1][3].VALUE , blocks.EATERLEFT.VALUE)
         });
     });
@@ -92,4 +87,21 @@ describe('Initialisation', function () {
         });
     });
 
+});
+
+describe('State resolution', function () {
+    describe('calling isFullCrateRow() given a row full of crate', function () {
+        it('method should return true', function () {
+            initGameGrid();
+            grid[lastRow] = [C,C,C,C,C,C];
+            assert.isTrue(isFullCrateRow(lastRow));
+        });
+    });
+    describe('calling isFullCrateRow() given a row with at least a non crate block', function () {
+        it('method should return true', function () {
+            initGameGrid();
+            grid[lastRow] = [C,C,G,C,C,C];
+            assert.isFalse(isFullCrateRow(lastRow));
+        });
+    });
 });

@@ -2,7 +2,7 @@ const gridRowNumber = 15; //game is initialized with 15 rows to set nextblock at
 const gridColumnNumber = 6;
 const nonVisibleRow = 2;
 const lastRow = gridRowNumber - nonVisibleRow;
-const blockSize = 32;
+const blockSize = 32; //pixel
 const blocksImagePath = "images/blocks/";
 
 var tickTime = 600; //ms
@@ -10,11 +10,12 @@ var interval;
 var canvas;
 var ctx;
 
-var grid;
 var currentRow = 1;
 var xPosition = 2; //this represent the block at the bottom-left of movable blocks (value between 0-4)
 
 var isGamePaused = false
+
+var grid;
 
 const blocks = {
     EMPTY:          {VALUE : 'empty',           IMAGE : getImageObject('empty.png')}, 
@@ -105,7 +106,11 @@ function tick(){
         *********************************
         */
 
-        isFullCrateLine(14); //testing
+        var rowFullofCrate = isFullCrateRow(14); //testing
+        console.log("dois-je supprimer la ligne ? " + rowFullofCrate);
+        if(rowFullofCrate == true){
+            deleteLine(14);
+        }
         
         //next game iteration
         resetPosition();
@@ -115,21 +120,16 @@ function tick(){
     displayGrid();
 }
 
-function isFullCrateLine(lineNumber){
-    var isFullCrateLine = true;
+function isFullCrateRow(lineNumber){
+    var isFullCrateRow = true;
     
     for (var i = 0; i < gridColumnNumber; i++){
         console.log("le block a l'indice " + i + " est un " + grid[lineNumber][i].VALUE);
         if( grid[lineNumber][i] != blocks.CRATE){
-            isFullCrateLine = false;
+            isFullCrateRow = false;
         }
     }
-    console.log("dois-je supprimer la ligne ? " + isFullCrateLine);
-    
-    if(isFullCrateLine == true){
-        deleteLine(lineNumber);
-    }
-    
+    return isFullCrateRow;
 }
 
 /* delete row by replacing it with previous rows  */
