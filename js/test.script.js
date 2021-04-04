@@ -98,10 +98,68 @@ describe('State resolution', function () {
         });
     });
     describe('calling isFullCrateRow() given a row with at least a non crate block', function () {
-        it('method should return true', function () {
+        it('method should return false', function () {
             initGameGrid();
             grid[lastRow] = [C,C,G,C,C,C];
             assert.isFalse(isFullCrateRow(lastRow));
+        });
+    });
+    describe('calling deleteLine() given a row', function () {
+        it('this row must be deleted and rows before it should goes down', function () {
+            initGameGrid();
+            console.log("lastRow is : " + lastRow);
+
+            grid[lastRow-1] = [E,E,G,C,E,C];
+            grid[lastRow]   = [C,C,C,C,C,C];
+            
+            deleteRow(lastRow);
+            assert.deepEqual(grid[lastRow-1], [E,E,E,E,E,E]);
+            assert.deepEqual(grid[lastRow],   [E,E,G,C,E,C]);
+        });
+    });
+    describe('calling deleteLine() given a grid with blocks on each playable rows', function () {
+        it('the first visible row will be empty', function () {
+            initGameGrid();
+            var initialGrid = [
+                [E,E,E,E,E,E],
+                [E,E,E,E,E,E],
+                [C,C,C,E,E,E],
+                [C,C,C,G,E,E],
+                [C,C,G,G,E,E],
+                [C,C,C,C,C,G],
+                [G,C,C,C,C,C],
+                [C,G,G,C,C,C],
+                [C,C,C,G,C,C],
+                [C,C,C,C,G,C],
+                [C,C,C,C,C,G],
+                [C,C,C,C,G,C],
+                [C,C,C,G,C,C],
+                [G,C,C,G,G,G],
+                [C,C,C,C,C,C]
+            ];
+            grid = initialGrid;
+            deleteRow(lastRow);
+            
+            var expectedGrid = [
+                [E,E,E,E,E,E],
+                [E,E,E,E,E,E],
+                [E,E,E,E,E,E],
+                [C,C,C,E,E,E],
+                [C,C,C,G,E,E],
+                [C,C,G,G,E,E],
+                [C,C,C,C,C,G],
+                [G,C,C,C,C,C],
+                [C,G,G,C,C,C],
+                [C,C,C,G,C,C],
+                [C,C,C,C,G,C],
+                [C,C,C,C,C,G],
+                [C,C,C,C,G,C],
+                [C,C,C,G,C,C],
+                [G,C,C,G,G,G]
+            ];
+            console.log(expectedGrid);
+            console.log(grid);
+            assert.deepEqual(grid, expectedGrid);
         });
     });
 });

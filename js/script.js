@@ -1,7 +1,12 @@
-const gridRowNumber = 15; //game is initialized with 15 rows to set nextblock at the top, but two firt rows wont be visible at the end
+/*
+game is initialized with 15 rows to set nextblock at the top, 
+but two firt rows wont be visible at the end.
+Visible rows are between 2 and 14'
+*/
+const gridRowNumber = 15; 
 const gridColumnNumber = 6;
-const nonVisibleRow = 2;
-const lastRow = gridRowNumber - nonVisibleRow;
+const firstVisibleRow = 2;
+const lastRow = gridRowNumber - 1;
 const blockSize = 32; //pixel
 const blocksImagePath = "images/blocks/";
 
@@ -109,7 +114,7 @@ function tick(){
         var rowFullofCrate = isFullCrateRow(14); //testing
         console.log("dois-je supprimer la ligne ? " + rowFullofCrate);
         if(rowFullofCrate == true){
-            deleteLine(14);
+            deleteRow(14);
         }
         
         //next game iteration
@@ -133,16 +138,19 @@ function isFullCrateRow(lineNumber){
 }
 
 /* delete row by replacing it with previous rows  */
-function deleteLine(lineNumber){
-    for (var i = lineNumber; i >= 1; i--)
+function deleteRow(rowNumber){
+    for (var i = rowNumber; i > 2; i--)
     {
         for (var y = 0; y < gridColumnNumber; y++)
         {
-            console.log("le bloc i" + i + "y" + y +  " " + grid[i][y].VALUE + " va prendre la position de " + grid[i-1][y].VALUE);
+            console.log("remplacement de la ligne"+ i);
             grid[i][y] = grid[i-1][y];
         }
-        //todo: la première linee se retrouve forcément vide.
     }
+    
+    grid[firstVisibleRow].forEach(function(value, index) {
+        grid[firstVisibleRow][index] = blocks.EMPTY
+    });
 }
 
 function playerBlockFallDown(){
@@ -169,7 +177,7 @@ function canPlayerBlocksFallDown(){
 }
 
 function isCurrentBlocksOnLastRow(){
-    return currentRow > lastRow;
+    return currentRow >= lastRow;
 }
 
 function isBlocksUnderCurrentBlocks(){
