@@ -1,0 +1,49 @@
+.game-grid{
+	/* 6 blocks width multiply by 32 pixels */
+	width : 192px;
+	/* 15 blocks width multiply by 32 pixels */
+	height : 480px;
+
+	font-size: 0; /*it remove spaces between ligns*/
+	
+	border : 1px solid black;
+}
+
+.block-grid{
+	width: 32px;
+	height: 32px;
+	display: inline-block;
+}
+
+.empty{ 		background-image: url("images/blocks/empty.png"); }
+.crate{ 		background-image: url("images/blocks/crate.png"); }
+.crate-dead{	background-image: url("images/blocks/crate_dead.png");}
+.ghost{			background-image: url("images/blocks/ghost.png");}
+.ghost-afraid{	background-image: url("images/blocks/ghost_afraid.png");}
+.eater-right{	background-image: url("images/blocks/eaterR.png");}
+.eater-left{	background-image: url("images/blocks/eaterL.png");}
+.fairy{			background-image: url("images/blocks/fairy.png");}
+
+#canvas{
+	border : 1px solid black;
+	margin : 0;
+    padding : 0;
+}
+
+#game-modal{
+	width : 192px;
+	height : 480px;
+	z-index: 2;
+	position:absolute;
+	/* border : 1px solid red; */
+}
+
+#game-info{
+	width : 50px;
+	height : 20px;
+	text-align: center;
+	margin: 200px auto;
+	/* border : 1px solid grey; */
+	border-radius: 8px;
+	background-color: white;
+}
